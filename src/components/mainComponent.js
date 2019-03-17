@@ -5,9 +5,11 @@ import RenderDetails from './renderDetails'
      constructor(props){
          super(props);
          this.state={
-            input: ''
+            input: '',
+            submit: ''
          }
          this.handleChange = this.handleChange.bind(this);
+         this.handleSubmit = this.handleSubmit.bind(this);
      }
 
      componentWillMount(){
@@ -22,20 +24,21 @@ import RenderDetails from './renderDetails'
          })
      }
 
-     showRender(){
-        
-             return <RenderDetails />
-         
+     handleSubmit(event){
+         this.setState({
+            submit: this.state.input
+         })
      }
 
     render(){
-        const {input} = this.state
         return(
         <div>
             <p>Enter the Twitter Handle </p>
-            <input type="text" value={this.state.input} onChange={this.handleChange} />
-            <button type="submit" onClick={this.handleClick}>Submit</button>
-            <h1>{input}</h1>
+            <form onSubmit={this.handleSubmit} >
+                <input type="text" value={this.state.input} onChange={this.handleChange} />
+                <button type="submit">Submit</button>
+            </form>
+            <h1>{this.state.submit}</h1>
         </div>);
     }
 }
